@@ -44,7 +44,7 @@ except RequestError:
 aq_sensor = PMS5003.PMS5003(serial_terminal="/dev/serial0") 
 
 # Create instance of airnow object
-airnow_api = airnow.airnow(key=AIRNOW_KEY) 
+airnow_api = airnow.airnow(api_key=AIRNOW_KEY) 
 
 
 # Function for cron scheduler
