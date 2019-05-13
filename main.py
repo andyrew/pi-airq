@@ -1,3 +1,6 @@
+import time
+time.sleep(30)
+
 import json
 import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -21,14 +24,21 @@ except RequestError:
     feed = Feed(name="pm2-dot-5")
     PM25 = aio.create_feed(feed)
 
+try:
+    AQI25 = aio.feeds('aqi-pm2-dot-5')
+except RequestError:
+    feed = Feed(name="aqi-pm2-dot-5")
+    PM25 = aio.create_feed(feed)
+
 # Create instance of PMS5003 object
-aiq_sensor = PMS5003.PMS5003(serial_terminal="/dev/serial0") 
+aq_sensor = PMS5003.PMS5003(serial_terminal="/dev/serial0") 
 
 
 # Function for cron scheduler
 def post_data():
-    aiq_sensor.read()
-    aio.append(PM25.key, aiq_sensor.pm25_standard)
+    aq_sensor.read()
+    aio.append(PM25.key, aq_sensor.pm25_standard)
+    aio.append(AQI25.key ,aq_sensor.aqi_pm25)
 
 
 # Cron like python scheduler

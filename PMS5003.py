@@ -2,6 +2,10 @@
 import serial
 import struct
 import sys
+import bisect
+
+aqi_breakpoints =       [ 0,   50,  100,  150,   200,   300,   400,   500 ]
+aqi_pm25_breakpoints =  [ 0, 12.1, 35.5, 55.5, 150.5, 250.5, 350.5, 500.5 ]
 
 class PMS5003:
     def __init__(self, serial_terminal="/dev/serial0"):
@@ -80,6 +84,16 @@ class PMS5003:
 
         except:
             sys.stderr.write('problem with PMS5003 read')
+
+        self.calc_aq_index()
+        
+
+    def calc_aq_index(self):
+        # find breakpoints
+        idx_pm25 = bisect.bisect_left(aqi_pm25_breakpoints, self.pm10_standard)
+        self.aqi_pm25 = ( aqi_breakpoints[idx_pm25] - aqi_breakpoints[idx_pm25-1] ) / (aqi_pm25_breakpoints[idx_pm25] - aqi_pm25_breakpoints[idx_pm25-1]) * 
+                        ( self.pm25_standard - aqi_pm25_breakpoints[idx_pm25-1] ) + aqi_breakpoints[idx_pm25-1]
+
 
 
 
