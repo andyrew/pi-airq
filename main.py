@@ -24,20 +24,20 @@ aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
 try:
     PM25 = aio.feeds('pm2-dot-5')
 except RequestError:
-    feed = Feed(name="pm2-dot-5")
-    PM25 = aio.create_feed(feed)
+    feed1 = Feed(name="pm2-dot-5")
+    PM25 = aio.create_feed(feed1)
 
 try:
     AQI25 = aio.feeds('aqi-pm2-dot-5')
 except RequestError:
-    feed = Feed(name="aqi-pm2-dot-5")
-    PM25 = aio.create_feed(feed)
+    feed2 = Feed(name="aqi-pm2-dot-5")
+    PM25 = aio.create_feed(feed2)
 
 try:
     AQI_outside = aio.feeds('aqi-outside')
 except RequestError:
-    feed = Feed(name="aqi-outside")
-    AQI_outside = aio.create_feed(feed)
+    feed3 = Feed(name="aqi-outside")
+    AQI_outside = aio.create_feed(feed3)
 
 # Create instance of PMS5003 object
 aq_sensor = PMS5003.PMS5003(serial_terminal="/dev/serial0") 
