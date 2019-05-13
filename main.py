@@ -1,5 +1,5 @@
 import time
-time.sleep(30)
+time.sleep(60)
 
 import json
 import datetime
