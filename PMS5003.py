@@ -82,10 +82,10 @@ class PMS5003:
             self.particles_50um = particles_50um
             self.particles_100um = particles_100um
 
+            self.calc_aq_index()
+
         except:
             sys.stderr.write('problem with PMS5003 read')
-
-        self.calc_aq_index()
 
 
     def calc_aq_index(self):
