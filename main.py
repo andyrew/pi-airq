@@ -58,5 +58,5 @@ def post_data():
 
 # Cron like python scheduler
 sched = BlockingScheduler()
-sched.add_job(post_data,'cron',year='*',month='*',day='*',week='*',day_of_week='*',hour='*', minute='0/5', second='0')
+sched.add_job(post_data,'cron',year='*',month='*',day='*',week='*',day_of_week='*',hour='*', minute='0/3', second='0')
 sched.start()
