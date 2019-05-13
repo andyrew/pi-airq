@@ -36,19 +36,19 @@ class PMS5003:
 
             if len(buffer) > 200:
                 buffer = []  # avoid an overrun if all bad data
-                raise overrun
+                raise RuntimeError("potential overrun avoided - PMS5003 read")
 
             if len(buffer) < 32:
-                raise not_enough
+                raise RuntimeError("not enough bytes received - PMS5003 read")
 
             if buffer[1] != 0x4d:
                 buffer.pop(0)
-                raise wrong_data
+                raise RuntimeError("data received doesn't start correctly - PMS5003 read")
 
             frame_len = struct.unpack(">H", bytes(buffer[2:4]))[0]
             if frame_len != 28:
                 buffer = []
-                raise incorrect_data
+                raise RuntimeError("not enough good bytes received - PMS5003 read")
 
             frame = struct.unpack(">HHHHHHHHHHHHHH", bytes(buffer[4:]))
 
@@ -60,7 +60,7 @@ class PMS5003:
 
             if check != checksum:
                 buffer = []
-                raise bad_checksum
+                raise RuntimeError("checksum doesn't match - PMS5003 read")
 
             # End Adafruit Code
             # Thanks Adafruit!
@@ -78,16 +78,6 @@ class PMS5003:
             self.particles_50um = particles_50um
             self.particles_100um = particles_100um
 
-        except overrun:
-            sys.stderr.write("potential overrun avoided - PMS5003 read")
-        except not_enough:
-            sys.stderr.write("not enough bytes received - PMS5003 read")
-        except wrong_data:
-            sys.stderr.write("data received doesn't start correctly - PMS5003 read")
-        except incorrect_data:
-            sys.stderr.write("not enough good bytes received - PMS5003 read")
-        except bad_checksum:
-            sys.stderr.write("checksum doesn't match - PMS5003 read")
         except:
             sys.stderr.write('problem with PMS5003 read')
 
