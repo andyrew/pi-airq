@@ -6,12 +6,12 @@ import sys
 class PMS5003:
     def __init__(self, serial_terminal="/dev/serial0"):
         self.serial_terminal = serial_terminal
-        self.baud_rate = 9600
+        self.baudrate = 9600
         self.read()
 
     def read(self):
         try:
-            self.serial_connection = serial.Serial(self.serial_terminal, baud_rate=self.baud_rate)
+            self.serial_connection = serial.Serial(self.serial_terminal, baudrate=self.baudrate)
 
             # The following block of code is largely taken from Adafruit Learning System Guides
             #
