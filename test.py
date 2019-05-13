@@ -6,6 +6,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from Adafruit_IO import Client, Feed, Data, RequestError
 
 import PMS5003
+import airnow
 
 
 #get key stored separately for secrecy.
