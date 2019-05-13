@@ -40,6 +40,7 @@ def post_data():
     aio.append(PM25.key, aq_sensor.pm25_standard)
     aio.append(AQI25.key ,aq_sensor.aqi_pm25)
 
+#post_data()
 
 # Cron like python scheduler
 sched = BlockingScheduler()

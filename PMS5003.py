@@ -86,13 +86,13 @@ class PMS5003:
             sys.stderr.write('problem with PMS5003 read')
 
         self.calc_aq_index()
-        
+
 
     def calc_aq_index(self):
         # find breakpoints
         idx_pm25 = bisect.bisect_left(aqi_pm25_breakpoints, self.pm10_standard)
-        self.aqi_pm25 = ( aqi_breakpoints[idx_pm25] - aqi_breakpoints[idx_pm25-1] ) / (aqi_pm25_breakpoints[idx_pm25] - aqi_pm25_breakpoints[idx_pm25-1]) * 
-                        ( self.pm25_standard - aqi_pm25_breakpoints[idx_pm25-1] ) + aqi_breakpoints[idx_pm25-1]
+        self.aqi_pm25 = int (( aqi_breakpoints[idx_pm25] - aqi_breakpoints[idx_pm25-1] ) / (aqi_pm25_breakpoints[idx_pm25] - aqi_pm25_breakpoints[idx_pm25-1]) * \
+                        ( self.pm25_standard - aqi_pm25_breakpoints[idx_pm25-1] ) + aqi_breakpoints[idx_pm25-1] )
 
 
 
