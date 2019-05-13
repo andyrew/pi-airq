@@ -26,7 +26,7 @@ aiq_sensor = PMS5003.PMS5003(serial_terminal="/dev/serial0")
 
 
 # Function for cron scheduler
-def post_data:
+def post_data():
     aiq_sensor.read()
     aio.append(PM25.key, aiq_sensor.pm25_standard)
 
