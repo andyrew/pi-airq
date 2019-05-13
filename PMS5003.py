@@ -84,7 +84,7 @@ class PMS5003:
             sys.stderr.write("not enough bytes received - PMS5003 read")
         except wrong_data:
             sys.stderr.write("data received doesn't start correctly - PMS5003 read")
-        except incorrect_data
+        except incorrect_data:
             sys.stderr.write("not enough good bytes received - PMS5003 read")
         except bad_checksum:
             sys.stderr.write("checksum doesn't match - PMS5003 read")
