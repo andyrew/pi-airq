@@ -1,6 +1,5 @@
 import time
-time.sleep(60)
-
+time.sleep(30)
 import json
 import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
