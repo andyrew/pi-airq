@@ -37,6 +37,7 @@ aq_sensor = PMS5003.PMS5003(serial_terminal="/dev/serial0")
 def post_data():
     aq_sensor.read()
     aio.append(PM25.key, aq_sensor.pm25_standard)
-    aio.append(AQI25.key ,aq_sensor.aqi_pm25)
+    aio.append(AQI25.key, aq_sensor.aqi_pm25)
 
 post_data()
+print(aq_sensor.pm25_standard,aq_sensor.aqi_pm25)
